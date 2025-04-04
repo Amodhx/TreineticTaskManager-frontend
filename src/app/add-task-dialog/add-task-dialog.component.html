@@ -1,0 +1,32 @@
+<h2 mat-dialog-title class="dialog-title">Add New Task</h2>
+
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="dialog-content">
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" required />
+      <mat-error *ngIf="taskForm.controls['title'].hasError('required')">Title is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" required></textarea>
+      <mat-error *ngIf="taskForm.controls['description'].hasError('required')">Description is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status" required>
+        <mat-option value="TO_DO">TO_DO</mat-option>
+        <mat-option value="IN_PROGRESS">IN_PROGRESS</mat-option>
+        <mat-option value="DONE">DONE</mat-option>
+      </mat-select>
+      <mat-error *ngIf="taskForm.controls['status'].hasError('required')">Status is required</mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="dialog-actions">
+    <button mat-button (click)="onClose()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="taskForm.invalid">Add Task</button>
+  </mat-dialog-actions>
+</form>
