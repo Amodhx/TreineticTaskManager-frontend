@@ -2,3 +2,40 @@
   color: gray;
   opacity: 50%;
 }
+.mat-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.mat-header-cell,
+.mat-cell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+  .mat-table {
+    width: 100%;
+  }
+
+  .mat-header-cell,
+  .mat-cell {
+    font-size: 14px;
+  }
+
+  .mat-chip {
+    font-size: 12px;
+  }
+
+  /* Optional: Adjust the margin for small screens */
+  .mat-button-toggle-group {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .mat-button-toggle {
+    margin: 5px;
+  }
+}
+
