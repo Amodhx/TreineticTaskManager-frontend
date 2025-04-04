@@ -15,7 +15,6 @@ import {MatChip} from '@angular/material/chips';
 import {NgClass} from '@angular/common';
 import {Task} from '../../features/tasks/TaskModel';
 import {TaskService} from '../../features/tasks/TaskService';
-import {Router} from '@angular/router';
 import {map, Observable} from 'rxjs';
 import {FormsModule} from '@angular/forms';
 import {AddTaskDialogComponent} from '../../add-task-dialog/add-task-dialog.component';
@@ -133,8 +132,9 @@ export class DashboardComponent implements OnInit{
         return '';
     }
   }
-  onRowClicked(row: any) {
-    console.log('Row clicked:', row);
+  onRowClicked(row: Task) {
+    const task = new Task(row.id,row.title,row.description,row.createdAt,row.status);
+
   }
   openAddTaskDialog(){
     this.dialog.open(AddTaskDialogComponent, {
