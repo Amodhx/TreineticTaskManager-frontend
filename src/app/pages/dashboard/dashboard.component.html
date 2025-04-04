@@ -6,11 +6,13 @@
   <mat-button-toggle-group
     name="ingredients"
     aria-label="Ingredients"
+    [(ngModel)]="selectedStatus"
+    (change)="onStatusChange(selectedStatus)"
     multiple
   >
-    <mat-button-toggle value="flour" checked>TO_DO</mat-button-toggle>
-    <mat-button-toggle value="eggs">IN_PROGRESS</mat-button-toggle>
-    <mat-button-toggle value="sugar">DONE</mat-button-toggle>
+    <mat-button-toggle value="TO_DO" checked>TO_DO</mat-button-toggle>
+    <mat-button-toggle value="IN_PROGRESS">IN_PROGRESS</mat-button-toggle>
+    <mat-button-toggle value="DONE">DONE</mat-button-toggle>
   </mat-button-toggle-group>
 </div>
 
