@@ -1,1 +1,19 @@
-<h2>DashBoard works</h2>
+<div style="margin-bottom: 7px; width: 100%; display: flex; justify-content: flex-end;">
+  <button style="margin-top: 5px; margin-right: 5px" mat-flat-button>Add Task</button>
+</div>
+<mat-divider class="divider_style"></mat-divider>
+<div style="margin-top: 7px; width: 100%; display: flex; justify-content: flex-start;">
+  <mat-button-toggle-group
+    name="ingredients"
+    aria-label="Ingredients"
+    multiple
+  >
+    <mat-button-toggle value="flour" checked>TO_DO</mat-button-toggle>
+    <mat-button-toggle value="eggs">IN_PROGRESS</mat-button-toggle>
+    <mat-button-toggle value="sugar">DONE</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+
+
+
+
