@@ -8,7 +8,10 @@ import {
   MatColumnDef,
   MatHeaderCell,
   MatHeaderCellDef,
-  MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatRow,
+  MatRowDef,
   MatTable
 } from '@angular/material/table';
 import {MatChip} from '@angular/material/chips';
@@ -19,7 +22,6 @@ import {map, Observable} from 'rxjs';
 import {FormsModule} from '@angular/forms';
 import {AddTaskDialogComponent} from '../../add-task-dialog/add-task-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -49,6 +51,7 @@ export class DashboardComponent implements OnInit{
 
   constructor( private taskService: TaskService,public dialog: MatDialog) {
   }
+  selectedTask: Task | null = null;
   selectedStatus: string[] = [];
   // @ts-ignore
   tasks$: Observable<Task[]> ;
@@ -133,8 +136,7 @@ export class DashboardComponent implements OnInit{
     }
   }
   onRowClicked(row: Task) {
-    const task = new Task(row.id,row.title,row.description,row.createdAt,row.status);
-
+    this.selectedTask = new Task(row.id, row.title, row.description, row.createdAt, row.status);
   }
   openAddTaskDialog(){
     this.dialog.open(AddTaskDialogComponent, {
