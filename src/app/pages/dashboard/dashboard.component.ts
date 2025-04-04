@@ -114,10 +114,8 @@ export class DashboardComponent implements OnInit{
     this.taskService.addTask(task5);
     this.taskService.addTask(task6);
 
-
-    this.tasks$ = this.taskService.getTasks().pipe(
-      map(tasks => tasks.filter(task => task.status === 'TO_DO'))
-    );
+    this.selectedStatus = [...this.selectedStatus,"TO_DO"];
+    this.onStatusChange(this.selectedStatus);
 
   }
   displayedColumns: string[] = ['id', 'Title', 'Description', 'createdAt', 'Status'];
