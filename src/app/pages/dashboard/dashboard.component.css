@@ -2,8 +2,3 @@
   color: gray;
   opacity: 50%;
 }
-@media (max-width: 768px) {
-  .divider_style{
-    display: none;
-  }
-}
