@@ -13,6 +13,10 @@ import {
 } from '@angular/material/table';
 import {MatChip} from '@angular/material/chips';
 import {NgClass} from '@angular/common';
+import {Task} from '../../features/tasks/TaskModel';
+import {TaskService} from '../../features/tasks/TaskService';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -39,12 +43,15 @@ import {NgClass} from '@angular/common';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  dataSource = [
-    { id: 1, title: 'Task 1', description: 'Description 1', createdAt: '2025-04-05', status: 'TO_DO' },
-    { id: 2, title: 'Task 2', description: 'Description 2', createdAt: '2025-04-06', status: 'IN_PROGRESS' },
-    { id: 3, title: 'Task 3', description: 'Description 3', createdAt: '2025-04-07', status: 'DONE' },
-  ];
+  constructor( private taskService: TaskService) {
+  }
+  // @ts-ignore
+  tasks$: Observable<Task[]> ;
 
+
+  ngOnInit() {
+    this.tasks$ = this.taskService.getTasks();
+  }
   displayedColumns: string[] = ['id', 'Title', 'Description', 'createdAt', 'Status'];
   getStatusClass(status: string) {
     switch(status) {
