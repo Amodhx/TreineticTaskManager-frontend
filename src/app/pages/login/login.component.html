@@ -1,1 +1,24 @@
-<p>login works!</p>
+<div class="container w-100 d-flex justify-content-center align-items-center vh-100 vw-100">
+  <div class="signup-card row">
+
+    <div class="col-md-6 p-4">
+      <h2 style="margin-top: 35px;">Store your tasks. Stay productive!</h2>
+      <p style="margin-top: 5px; color: gray">Signup to our website and ready to store your tasks? Stay organized and productive with ease</p>
+
+      <form (submit)="onSignup()" style="margin-top: 15px">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" autocomplete="false">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" required autocomplete="false">
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="w-100">Sign Ip</button>
+      </form>
+    </div>
+    <div class="col-md-6 d-none d-md-block">
+      <img src="login image.png" class="img-fluid" alt="Signup Illustration">
+    </div>
+  </div>
+</div>
