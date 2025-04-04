@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {RouterLink, RouterOutlet} from "@angular/router";
+import {Router, RouterLink, RouterOutlet} from "@angular/router";
 import {NgClass, NgIf} from "@angular/common";
 
 @Component({
@@ -16,9 +16,16 @@ import {NgClass, NgIf} from "@angular/common";
 })
 export class SidebarComponent {
   isSidebarOpen = false;
+  constructor(private router: Router) {
+  }
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
-
+  onTasksClick(){
+    this.router.navigate(['dashboard/tasks']);
+  }
+  onSettingClick(){
+    this.router.navigate(['dashboard/settings']);
+  }
 }
