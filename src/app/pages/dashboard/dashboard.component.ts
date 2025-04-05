@@ -18,7 +18,7 @@ import {MatChip} from '@angular/material/chips';
 import {NgClass} from '@angular/common';
 import {Task} from '../../features/tasks/TaskModel';
 import {TaskService} from '../../features/tasks/TaskService';
-import {map, Observable} from 'rxjs';
+import {map, Observable, of} from 'rxjs';
 import {FormsModule} from '@angular/forms';
 import {AddTaskDialogComponent} from '../../add-task-dialog/add-task-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
@@ -52,73 +52,39 @@ export class DashboardComponent implements OnInit{
 
   constructor( private taskService: TaskService,public dialog: MatDialog) {
   }
+  tasks: Task[] = [];
   selectedTask: Task | null = null;
   selectedStatus: string[] = [];
   // @ts-ignore
   tasks$: Observable<Task[]> ;
-
-  onStatusChange(status: string[]) {
+  async changeUI(){
+    this.onStatusChange(this.selectedStatus);
+  }
+  async onStatusChange(status: string[]) {
     this.selectedStatus = status;
     if (status.length > 0) {
-      this.tasks$ = this.taskService.getTasks().pipe(
-        map(tasks => tasks.filter(task => status.includes(task.status)))
-      );
+      const observable = await this.taskService.getTasks();
+      if (observable) {
+        this.tasks$ = observable.pipe(
+          map(tasks => tasks.filter(task => status.includes(task.status)))
+        );
+      } else {
+        this.tasks$ = of([]);
+      }
     } else {
-      // @ts-ignore
-      this.tasks$ = null;
+      this.tasks$ = of([]);
     }
   }
 
-  ngOnInit() {
-    const newTask: Task = new Task(
-      1,
-      'Complete Project',
-      'Finish the task manager project by the end of the week',
-      'TO_DO',
-      '2025-04-05T12:00:00'
-    );
-    const task1: Task = new Task(
-      2,
-      'Write Blog Post',
-      'Write a blog post about Angular state management and publish it by next week',
-      'IN_PROGRESS',
-      '2025-04-04T14:00:00'
-    );
-    const task3: Task = new Task(
-      4,
-      'Prepare Presentation',
-      'Prepare a presentation for the upcoming team meeting on project progress',
-      'DONE',
-      '2025-04-03T17:00:00'
-    );
-    const task4: Task = new Task(
-      5,
-      'Research New Technologies',
-      'Research the latest trends in AI and machine learning',
-      'TO_DO',
-      '2025-04-05T12:00:00'
-    );
-    const task5: Task = new Task(
-      6,
-      'Clean Desk',
-      'Clean and organize the work desk to increase productivity',
-      'DONE',
-      '2025-04-02T10:30:00'
-    );
-    const task6: Task = new Task(
-      7,
-      'Team Meeting',
-      'Attend the weekly team meeting to discuss project updates',
-      'IN_PROGRESS',
-      '2025-04-05T11:00:00'
-    );
-    this.taskService.addTask(newTask);
-    this.taskService.addTask(task1);
-    this.taskService.addTask(task3);
-    this.taskService.addTask(task4);
-    this.taskService.addTask(task5);
-    this.taskService.addTask(task6);
 
+  ngOnInit() {
+    // @ts-ignore
+    this.taskService.tasks$.subscribe(tasks => {
+      this.tasks = tasks;
+    });
+    this.taskService.getChangeUIObservable().subscribe(() => {
+      this.changeUI();
+    });
     this.selectedStatus = [...this.selectedStatus,"TO_DO"];
     this.onStatusChange(this.selectedStatus);
 
@@ -137,7 +103,7 @@ export class DashboardComponent implements OnInit{
     }
   }
   onRowClicked(row: Task) {
-    this.selectedTask = new Task(row.id, row.title, row.description, row.status, row.createdAt);
+    this.selectedTask = new Task(row.id, row.title, row.description, row.status, row.createdAt,row.user_id);
     console.log(this.selectedTask);
     const dialogRef = this.dialog.open(TaskModalComponent, {
       data: this.selectedTask,

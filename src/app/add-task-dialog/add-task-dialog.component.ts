@@ -45,10 +45,13 @@ export class AddTaskDialogComponent {
 
   onSubmit() {
     if (this.taskForm.valid) {
-      const newTask = { ...this.taskForm.value, createdAt: new Date().toISOString() };
-      this.taskService.addTask(newTask);
-      this.dialogRef.close();
-    }
+      let id= localStorage.getItem('id');
+      if (id){
+        const newTask = { ...this.taskForm.value, createdAt: new Date().toISOString(),user_id : +id };
+        this.taskService.addTask(newTask);
+        this.dialogRef.close();
+      }
+      }
   }
 
   onClose() {
