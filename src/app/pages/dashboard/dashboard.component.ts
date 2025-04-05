@@ -22,7 +22,7 @@ import {map, Observable} from 'rxjs';
 import {FormsModule} from '@angular/forms';
 import {AddTaskDialogComponent} from '../../add-task-dialog/add-task-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
-import {TaskModalComponent} from '../../task-modal.component/task-modal.component.component';
+import {TaskModalComponent} from '../../task-modal/task-modal.component';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -137,20 +137,11 @@ export class DashboardComponent implements OnInit{
     }
   }
   onRowClicked(row: Task) {
-    this.selectedTask = new Task(row.id, row.title, row.description, row.createdAt, row.status);
+    this.selectedTask = new Task(row.id, row.title, row.description, row.status, row.createdAt);
+    console.log(this.selectedTask);
     const dialogRef = this.dialog.open(TaskModalComponent, {
       data: this.selectedTask,
       panelClass: 'custom-dialog-container'
-    });
-
-    dialogRef.afterClosed().subscribe(updatedTask => {
-      if (updatedTask) {
-        // @ts-ignore
-        const index = this.tasks$.findIndex(t => t.id === updatedTask.id);
-        if (index !== -1) { // @ts-ignore
-          this.tasks$[index] = updatedTask;
-        }
-      }
     });
   }
   openAddTaskDialog(){

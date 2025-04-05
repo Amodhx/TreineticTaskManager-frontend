@@ -6,12 +6,13 @@ import {MatOption} from '@angular/material/core';
 import {MatSelect} from '@angular/material/select';
 import {MatButton} from '@angular/material/button';
 import {NgIf} from '@angular/common';
+import {TaskService} from '../features/tasks/TaskService';
 
 
 @Component({
   selector: 'app-task-modal',
-  templateUrl: './task-modal.component.component.html',
-  styleUrls: ['./task-modal.component.component.css'],
+  templateUrl: './task-modal.component.html',
+  styleUrls: ['./task-modal.component.css'],
   imports: [
     FormsModule,
     MatSelect,
@@ -27,15 +28,20 @@ export class TaskModalComponent {
 
   constructor(
     public dialogRef: MatDialogRef<TaskModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public task: Task
+    @Inject(MAT_DIALOG_DATA) public task: Task,
+    private taskService: TaskService
   ) {}
 
   close(): void {
     this.dialogRef.close();
   }
 
-  saveTask(): void {
-    console.log('Updated Task:', this.task);
+  updateTask(): void {
+    this.taskService.updateTask(this.task);
+    this.dialogRef.close(this.task);
+  }
+  deleteTask():void{
+    this.taskService.deleteTask(this.task.id);
     this.dialogRef.close(this.task);
   }
 }

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TaskModalComponentComponent } from './task-modal.component.component';
+import { TaskModalComponentComponent } from './task-modal.component';
 
 describe('TaskModalComponentComponent', () => {
   let component: TaskModalComponentComponent;

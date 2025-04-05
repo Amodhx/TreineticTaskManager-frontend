@@ -1,0 +1,36 @@
+<div class="modal-container">
+
+
+  <div class="modal-header">
+    <h4 style="margin-top: 10px; font-style: revert; color: gray">Task Details</h4>
+    <button  (click)="close()" class="close-btn">✕</button>
+  </div>
+
+  <div style="margin-top: 25px" class="modal-body">
+    <h1 *ngIf="!isEditingTitle" (click)="isEditingTitle = true" class="editable">
+      {{ task.title || 'Click to add title' }}
+    </h1>
+    <input *ngIf="isEditingTitle" [(ngModel)]="task.title" (blur)="isEditingTitle = false" class="edit-input" />
+
+    <p style="margin-top: 15px" *ngIf="!isEditingDescription" (click)="isEditingDescription = true" class="editable">
+      {{ task.description || 'Click to add description' }}
+    </p>
+    <textarea style="width: 510px !important;" *ngIf="isEditingDescription" [(ngModel)]="task.description" (blur)="isEditingDescription = false" class="edit-input"></textarea>
+
+    <div style="margin-top: 25px;" class="task-meta">
+      <label>Status:</label>
+      <mat-select style="color: white" [(ngModel)]="this.task.status">
+        <mat-option value="TO_DO">To Do</mat-option>
+        <mat-option value="IN_PROGRESS">In Progress</mat-option>
+        <mat-option value="DONE">Done</mat-option>
+      </mat-select>
+    </div>
+
+    <p style="margin-top: 20px" class="date">Created: {{ this.task.createdAt }}</p>
+  </div>
+
+  <div style="margin-top: 50px" class="modal-footer">
+    <button style="margin: 5px" mat-button (click)="updateTask()" class="btn-primary">Update</button>
+    <button style="margin: 5px" mat-button (click)="deleteTask()" class="btn-primary">Delete</button>
+  </div>
+</div>
