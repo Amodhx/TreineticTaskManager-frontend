@@ -2,10 +2,10 @@
   <div class="signup-card row">
 
     <div class="col-md-6 p-4">
-      <h2 style="margin-top: 35px;">Store your tasks. Stay productive!</h2>
-      <p style="margin-top: 5px; color: gray">Signup to our website and ready to store your tasks? Stay organized and productive with ease</p>
+      <h2 style="margin-top: 5px;">Create an account and stay productive!</h2>
+      <p style="margin-top: 5px; color: gray">Sign up to store your tasks and stay organized and productive with ease</p>
 
-      <form (submit)="onSignup()" style="margin-top: 15px">
+      <form (submit)="onSignUp()" style="margin-top: 15px">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Email</mat-label>
           <input matInput type="email" [(ngModel)]="email" name="email" autocomplete="false">
@@ -14,8 +14,12 @@
           <mat-label>Password</mat-label>
           <input matInput type="password" [(ngModel)]="password" name="password" required autocomplete="false">
         </mat-form-field>
-        <button mat-raised-button color="primary" class="w-100">Sign In</button>
-        <p style="margin-top: 5px">Do you hvn`t a account <a href="/signup">Sign Up</a></p>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput type="password" [(ngModel)]="confirmPassword" name="confirmPassword" required autocomplete="false">
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="w-100">Sign Up</button>
+        <p style="margin-top: 5px">Already have an account? <a (click)="onLoginClick()">Login</a></p>
       </form>
     </div>
     <div class="col-md-6 d-none d-md-block">
