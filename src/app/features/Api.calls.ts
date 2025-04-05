@@ -22,6 +22,17 @@ class ApiCalls {
       return Promise.reject(error);
     }
   }
+  async signUp(user:UserModel){
+    try {
+      const response:any = await this.api.post('/auth/signUn', user)
+      if (response){
+        return  response.data;
+      }
+      return []
+    }catch (error){
+      return Promise.reject(error);
+    }
+  }
   async saveTask(task:Task){
     try {
         const response:any = await this.api.post('/task/saveTask', task, {
