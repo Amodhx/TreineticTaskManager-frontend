@@ -37,6 +37,7 @@ export class SignUpComponent {
     if (newVar.token) {
       localStorage.setItem('token', newVar.token);
       localStorage.setItem('id',newVar.id);
+      localStorage.setItem('email',newVar.email);
       this.router.navigate(['/dashboard']);
     }else {
     }

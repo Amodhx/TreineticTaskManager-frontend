@@ -34,6 +34,8 @@ export class LoginComponent {
     if (newVar.token) {
       localStorage.setItem('token', newVar.token);
       localStorage.setItem('id',newVar.id);
+      localStorage.setItem('email',newVar.email);
+      console.log(localStorage)
       this.router.navigate(['/dashboard']);
     }else {
     }

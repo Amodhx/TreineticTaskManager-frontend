@@ -10,7 +10,15 @@ class ApiCalls {
   api = axios.create({
     baseURL : this.base_url
   })
+  // @ts-ignore
+  async changePassword(user:UserModel){
+    try {
+      const response:any = await this.api.post('/auth/changePassword',user)
+      return response.status == 201;
+    }catch (e) {
 
+    }
+  }
   async signIn(user:UserModel){
     try {
       const response:any = await this.api.post('/auth/signIn', user)
