@@ -5,7 +5,7 @@ import {UserModel} from './users/UserModel';
 
 class ApiCalls {
 
-  base_url: string = "http://localhost:5050/api/v1"
+  base_url: string = "http://localhost:8081/api/v1"
 
   api = axios.create({
     baseURL : this.base_url

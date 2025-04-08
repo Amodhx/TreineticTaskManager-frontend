@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {MatCard, MatCardContent, MatCardTitle} from '@angular/material/card';
 import {FormsModule} from '@angular/forms';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
@@ -17,8 +17,7 @@ import {UserModel} from '../../features/users/UserModel';
     MatFormField,
     MatLabel,
     MatInput,
-    MatButton,
-    MatSlideToggle
+    MatButton
   ],
   templateUrl: './setting.component.html',
   standalone: true,
